@@ -2,6 +2,7 @@
 import { CreateTemplateDto } from '../dto/create.template.dto';
 import { PatchTemplateDto } from '../dto/patch.template.dto';
 import { PutTemplateDto } from '../dto/put.template.dto';
+//import { createSVGDocument } from "../../build/release.js";
 
 // Data access objects (DAOs)
 class TemplatesDao {
@@ -11,7 +12,12 @@ class TemplatesDao {
         console.log('Created new instance of TemplatesDao');
     }
     async add(template: CreateTemplateDto) {
-        template.id = "user_template";
+
+        //let ratio:number = 800;
+        //let map:string = "set9";
+        //let text:string = "abc";
+
+        template.id = "ab";
         this.templates.push(template);
         return template.id;
     }

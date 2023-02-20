@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Medigeist REST API",
   "main": "dist/server.js",
+  "type": "module",
   "scripts": {
     "build": "webpack",
     "start": "node dist/server.js",

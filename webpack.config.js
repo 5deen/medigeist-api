@@ -25,5 +25,8 @@ module.exports = {
             loader: 'ts-loader',
             exclude: /node_modules/
         }]
+    },
+    experiments: {
+        topLevelAwait: true
     }
 }
