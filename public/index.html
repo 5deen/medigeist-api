@@ -7,8 +7,42 @@
     <title>Medigeist API</title>
 </head>
 <body>
-    <h1>Medigeist API</h1>
+    
+  <script type="text/javascript" language="javascript">
+    function send()
+{
+    
+    let endpoint = "templates";
+
+    let BodyJSON = '[ {
+    "ratio": 800, "lib": "set1", "text":"abc"
+}  ]';
+
+    URL = "https://medigeist-api.5deen.repl.co/" + endpoint;  //Your URL
+
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+    xmlhttp.open("POST", URL, false);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    // xmlhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); // in prod, you should encrypt user name and password and provide encrypted keys here instead 
+    xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+    xmlhttp.send(BodyJSON);
+    alert(xmlhttp.responseText);
+    document.getElementById("result").innerHTML = xmlhttp.statusText + ":" + xmlhttp.status + "<br/><textarea rows='100' cols='100'>" + xmlhttp.responseText + "</textarea>";
+}
+
+function callbackFunction(xmlhttp) 
+{
+    alert(xmlhttp.responseXML);
+}
+  </script>
+  <h1>Medigeist API</h1>
     <p>Console</p>
     <hr/>
+  <div>
+    <h2>Send POST Request (templates)</h2>
+    <button type="submit" onclick="javascript:send()">Call</button>
+<div id='result'></div>
+  </div>
 </body>
 </html>
