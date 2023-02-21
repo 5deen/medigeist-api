@@ -7,17 +7,17 @@ const {
 module.exports = {
     externals: [nodeExternals()],
     entry: {
-        server: "./src/server.ts"
+        main: "./src/main.ts"
     },
     mode: NODE_ENV,
     target: 'node',
     output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].cjs',
+        path: path.resolve(__dirname, 'public/dist'),
         clean: true
     },
     resolve: {
-        extensions: ['.ts', 'tsx', '.js'],
+        extensions: ['.ts', 'tsx', '.js','.cjs'],
     },
     module: {
         rules: [{

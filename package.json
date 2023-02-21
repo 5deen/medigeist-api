@@ -2,12 +2,12 @@
   "name": "medigeist-api",
   "version": "1.0.0",
   "description": "Medigeist REST API",
-  "main": "dist/server.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
     "build": "webpack",
-    "start": "node dist/server.js",
-    "all": "webpack && node dist/server.js",
+    "start": "node ./public/dist/main.cjs",
+    "all": "webpack && node ./public/dist/main.cjs",
     "console": "node --no-warnings console",
     "test": "node test"
   },

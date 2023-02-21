@@ -1,34 +1,32 @@
-import TemplatesDao from '../models/daos/templates.dao'
-import { CRUD } from '../interfaces/crud.interface';
-import { CreateTemplateDto } from '../models/dto/create.template.dto';
-import { PatchTemplateDto } from '../models/dto/patch.template.dto';
-import { PutTemplateDto } from '../models/dto/put.template.dto';
+import { CRUD, params } from '../interfaces';
+import { createSVGDocument } from "../../build/release.js";
 
-class TemplatesService implements CRUD {
-    async create(resource: CreateTemplateDto) {
-        return TemplatesDao.add(resource);
-    }
-
-    async deleteById(id: string) {
-        return TemplatesDao.removeById(id);
-    }
-
-    async list(limit: number, page: number) {
-        return TemplatesDao.get();
-    }
-
-    async patchById(id: string, resource: PatchTemplateDto): Promise<any> {
-        return TemplatesDao.patchById(id, resource);
-    }
-
-    async putById(id: string, resource: PutTemplateDto): Promise<any> {
-        return TemplatesDao.putById(id, resource);
-    }
-
-    async readById(id: string) {
-        return TemplatesDao.getById(id);
-    }
-
+function generate(p:params) {
+    return createSVGDocument(p.ratio,p.lib,p.text);
 }
 
-export default new TemplatesService();
+class Service implements CRUD {
+
+    async all(limit: number, page: number) {
+        return "all";
+    }
+    async get(id: string) {
+        return id;
+    }
+    async post(resource: object) {
+        let body: params = <params><object>resource;
+        let result: string = generate(body);
+        return result;
+    }
+    async patch(id: string, resource: string) {
+        return "patch";
+    }
+    async put(id: string, resource: string) {
+        return "put";
+    }
+    async delete(id: string) {
+        return "delete";
+    }
+}
+
+export default new Service();

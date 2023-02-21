@@ -3,10 +3,10 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "target": "es6",
-    "module": "commonjs",
+    "target": "ES5",
+    "module": "ES2015",
     "sourceMap": false,
-    "outDir": "./dist",
+    "outDir": "./public/dist",
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./", /* Base directory to resolve non-absolute module names. */
