@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medigeist API</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medigeist REST API</title>
 </head>
+
 <body>
-    
-  <script type="text/javascript" language="javascript">
-    function send()
-{
-    
-    let endpoint = "templates";
-
-    let BodyJSON = '[ {
-    "ratio": 800, "lib": "set1", "text":"abc"
-}  ]';
-
-    URL = "https://medigeist-api.5deen.repl.co/" + endpoint;  //Your URL
-
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
-    xmlhttp.open("POST", URL, false);
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    // xmlhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); // in prod, you should encrypt user name and password and provide encrypted keys here instead 
-    xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
-    xmlhttp.send(BodyJSON);
-    alert(xmlhttp.responseText);
-    document.getElementById("result").innerHTML = xmlhttp.statusText + ":" + xmlhttp.status + "<br/><textarea rows='100' cols='100'>" + xmlhttp.responseText + "</textarea>";
-}
-
-function callbackFunction(xmlhttp) 
-{
-    alert(xmlhttp.responseXML);
-}
-  </script>
-  <h1>Medigeist API</h1>
-    <p>Console</p>
-    <hr/>
+  <h1>Medigeist REST API</h1>
+  <p>References:</p>
+  <p><a href="https://axios-http.com">https://axios-http.com</a></p>
+  <hr />
   <div>
-    <h2>Send POST Request (templates)</h2>
-    <button type="submit" onclick="javascript:send()">Call</button>
-<div id='result'></div>
+    <h2>Sample POST Request (templates)</h2>
+    <button type="submit" onclick="javascript:submit(data)">Submit</button>
+    <button type="reset" onclick="javascript:reset()">Reset</button>
+    <hr />
+    <div id='result'></div>
   </div>
+  <script type="text/javascript" language="javascript">
+
+    let data = { "ratio": 800, "lib": "set9", "text": "12bgF" };
+
+    function reset() {
+      document.getElementById("result").innerHTML = '<p>See the result here.</p>';
+    }
+
+    function createImage(svg, el) {
+      let encoded = btoa(svg);
+      let src = `data:image/svg+xml;base64,${encoded}`;
+      let img = `<img src="${src}"/>`;
+
+      document.getElementById(el).innerHTML = img;
+    }
+
+    function submit(data) {
+      let endpoint = "http://localhost:3000/templates";
+
+      axios.post(endpoint, data)
+        .then(function (response) {
+          console.log(response.data.uid);
+          createImage(response.data.uid, "result");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </body>
+
 </html>
