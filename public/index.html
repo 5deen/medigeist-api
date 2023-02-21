@@ -18,7 +18,9 @@
     <button type="submit" onclick="javascript:submit(endpoints.replit,data)">Submit</button>
     <button type="reset" onclick="javascript:reset()">Reset</button>
     <hr />
-    <div id='result'></div>
+    <div id='result'>
+      <img id="output" alt="placeholder for image"></img>
+    </div>
   </div>
   <script type="text/javascript" language="javascript">
 
@@ -33,12 +35,39 @@
       document.getElementById("result").innerHTML = '<p>See the result here.</p>';
     }
 
-    function createImage(svg, el) {
-      let encoded = btoa(svg);
-      let src = `data:image/svg+xml;base64,${encoded}`;
-      let img = `<img src="${src}"/>`;
+    function createPNG (svgDataUrl) {
+      const output = document.querySelector('#output');
+      const image = new Image();
 
-      document.getElementById(el).innerHTML = img;
+  image.addEventListener('load', () => {
+    const width = 800;
+    const height = 800;
+    const canvas = document.createElement('canvas');
+
+    canvas.setAttribute('width', width);
+    canvas.setAttribute('height', height);
+
+    const context = canvas.getContext('2d');
+    context.drawImage(image, 0, 0, width, height);
+
+    const dataUrl = canvas.toDataURL('image/png');
+    output.src = dataUrl;
+  })
+
+  image.src = svgDataUrl;
+    }
+
+    function createImage(svg, el) {
+      //let encoded = btoa(svg);
+      //let src = `data:image/svg+xml;base64,${encoded}`;
+      // let img = `<img src="${src}"/>`;
+
+      //document.getElementById(el).innerHTML = img;
+
+      const svgDataBase64 = btoa(unescape(encodeURIComponent(svg)));
+      const svgDataSrc = `data:image/svg+xml;charset=utf-8;base64,${svgDataBase64}`;
+
+      createPNG(svgDataSrc);
     }
 
     function submit(ep,data) {
