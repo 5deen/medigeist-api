@@ -15,12 +15,17 @@
   <hr />
   <div>
     <h2>Sample POST Request (templates)</h2>
-    <button type="submit" onclick="javascript:submit(data)">Submit</button>
+    <button type="submit" onclick="javascript:submit(endpoints.replit,data)">Submit</button>
     <button type="reset" onclick="javascript:reset()">Reset</button>
     <hr />
     <div id='result'></div>
   </div>
   <script type="text/javascript" language="javascript">
+
+    const endpoints = {
+        local:"http://localhost:3000/templates", 
+        replit:"https://medigeist-api.5deen.repl.co/templates"
+      };
 
     let data = { "ratio": 800, "lib": "set9", "text": "12bgF" };
 
@@ -36,10 +41,9 @@
       document.getElementById(el).innerHTML = img;
     }
 
-    function submit(data) {
-      let endpoint = "http://localhost:3000/templates";
-
-      axios.post(endpoint, data)
+    function submit(ep,data) {
+      
+      axios.post(ep, data)
         .then(function (response) {
           console.log(response.data.uid);
           createImage(response.data.uid, "result");
