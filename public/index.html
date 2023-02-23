@@ -15,7 +15,7 @@
   <hr />
   <div>
     <h2>Sample POST Request (templates)</h2>
-    <button type="submit" onclick="javascript:submit(endpoints.replit,data)">Submit</button>
+    <button type="submit" onclick="javascript:submit(endpoints.local,data)">Submit</button>
     <button type="reset" onclick="javascript:reset()">Reset</button>
     <hr />
     <div id='result'>
@@ -57,13 +57,8 @@
   image.src = svgDataUrl;
     }
 
-    function createImage(svg, el) {
-      //let encoded = btoa(svg);
-      //let src = `data:image/svg+xml;base64,${encoded}`;
-      // let img = `<img src="${src}"/>`;
-
-      //document.getElementById(el).innerHTML = img;
-
+    function createImage(svg) {
+      
       const svgDataBase64 = btoa(unescape(encodeURIComponent(svg)));
       const svgDataSrc = `data:image/svg+xml;charset=utf-8;base64,${svgDataBase64}`;
 
@@ -75,7 +70,7 @@
       axios.post(ep, data)
         .then(function (response) {
           console.log(response.data.uid);
-          createImage(response.data.uid, "result");
+          createImage(response.data.uid);
         })
         .catch(function (error) {
           console.log(error);
